@@ -1,1 +1,0 @@
-{"mappings":"AACIA,QAAQC,IAAI","sources":["src/js/04-dom.js"],"sourcesContent":["function foo() { \n    console.log(\"foo 2222222\");\n}\n\nexport { foo };"],"names":["console","log"],"version":3,"file":"04-to_do.62e0f0a9.js.map"}
