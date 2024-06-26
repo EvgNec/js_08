@@ -4,6 +4,8 @@ const localStorageKey = 'tasks';
 const myInput = document.getElementById('myInput');
 const myUL = document.getElementById('myUL');
 
+let currentID = 0;
+
 function addNewTask() {
   const task = myInput.value.trim();
   myInput.value = '';
@@ -15,9 +17,9 @@ function addNewTask() {
   addTaskToLocalStorage(task);
 }
 
-function createLi(text) {
+function createLi(text, isDone = false, id = currentID) {
   const liEl = document.createElement('li');
-  liEl.textContent = text;
+  liEl.textContent = text;  
   myUL.appendChild(liEl);
   addCloseButton(liEl);
 }
@@ -61,9 +63,8 @@ function addTaskToLocalStorage(text, isDone = false) {
     save(localStorageKey, arr);
   } else {
     //до вже існуючого масиву додати новий об'єкт задачі
-    const arr = [...currentState];
-    arr.push(createTaskObj(text, isDone));
-    save(localStorageKey, arr);
+    currentState.push(createTaskObj(text, isDone));
+    save(localStorageKey, currentState);
   }
 }
 export { addNewTask, handlTaskBehavior };
