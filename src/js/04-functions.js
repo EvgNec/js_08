@@ -29,9 +29,17 @@ function addCloseButton(target) {
     target.appendChild(span);
 }
 
-function handlTaskBehavior({ target}) {
-    console.log("target", target)
-    
+function handlTaskBehavior({ target }) {
+  //  Target.tagName -повертає назву HTML-тега елемента Target
+  // Target.nodeName -повертає імя пточного вузла у вигляді строки
+  console.log("target.nodename", target);
+
+  if (target.nodeName === "LI") {
+    target.classList.toggle("checked");
+  }
+  else if (target.classList.contains("close")) {
+    target.parentNode.remove();
+  }
 }
 
 
