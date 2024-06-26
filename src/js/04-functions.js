@@ -1,3 +1,6 @@
+import { save, load } from './04-local_storage';
+const localStorageKey = "tasks";
+
 const myInput = document.getElementById('myInput');
 const myUL = document.getElementById('myUL');
 
@@ -9,7 +12,9 @@ function addNewTask() {
     return;
   }
   createLi(task);
+  addTaskToLocalStorage(task)
 }
+
 function createLi(text) {
   const liEl = document.createElement('li');
   liEl.textContent = text;
@@ -32,15 +37,24 @@ function addCloseButton(target) {
 function handlTaskBehavior({ target }) {
   //  Target.tagName -повертає назву HTML-тега елемента Target
   // Target.nodeName -повертає імя пточного вузла у вигляді строки
-  console.log("target.nodename", target);
-
   if (target.nodeName === "LI") {
-    target.classList.toggle("checked");
-  }
+    target.classList.toggle("checked");}
   else if (target.classList.contains("close")) {
-    target.parentNode.remove();
+    target.parentNode.remove();}
+}
+
+function createTaskObj(text, isDone) {
+  return {
+    text, isDone, id: 0
   }
 }
 
-
+function addTaskToLocalStorage(text, isDone =  false) {
+  const currentState = load(localStorageKey);
+  if (currentState === undefined) {
+    //створюємо масив і додаємо туди перший об'єкт задачі
+  } else {
+    //до вже існуючого масиву додати новий об'єкт задачі
+  }
+}
 export { addNewTask, handlTaskBehavior };
