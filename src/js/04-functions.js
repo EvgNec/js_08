@@ -18,8 +18,13 @@ function addNewTask() {
 }
 
 function createLi(text, isDone = false, id = currentID) {
+  console.log("currentID", currentID);
   const liEl = document.createElement('li');
-  liEl.textContent = text;  
+  liEl.textContent = text; 
+  console.log("liEl.dataset.id1", liEl.dataset.id);
+  liEl.dataset.id = id;
+  console.log("liEl.dataset.id2", liEl.dataset.id)
+  if(isDone) liEl.classList.add("checked");
   myUL.appendChild(liEl);
   addCloseButton(liEl);
 }
@@ -37,10 +42,15 @@ function addCloseButton(target) {
 }
 
 function handlTaskBehavior({ target }) {
+  const currentState = load(localStorageKey);
+  console.log("currentState", currentState)
+
   //  Target.tagName -повертає назву HTML-тега елемента Target
   // Target.nodeName -повертає імя пточного вузла у вигляді строки
   if (target.nodeName === 'LI') {
     target.classList.toggle('checked');
+    const taskIndex = currentState.findIndex(task => task.id = target.dataset.id);
+          console.log("taskIndex", taskIndex)
   } else if (target.classList.contains('close')) {
     target.parentNode.remove();
   }
@@ -66,5 +76,6 @@ function addTaskToLocalStorage(text, isDone = false) {
     currentState.push(createTaskObj(text, isDone));
     save(localStorageKey, currentState);
   }
+  currentID += 1;
 }
 export { addNewTask, handlTaskBehavior };
