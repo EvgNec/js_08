@@ -77,4 +77,18 @@ function addTaskToLocalStorage(text, isDone = false) {
   }
   currentID += 1;
 }
-export { addNewTask, handlTaskBehavior };
+
+function fillTaskList() {
+  const currentState = load(localStorageKey);
+  if (currentState !== undefined) {
+    currentState.forEach(({ text, isDone, id }) => {
+      createLi(text, isDone, id)
+      currentID = id + 1;
+    });
+    // currentID =
+    //   currentState.length === 0
+    //     ? 0
+    //     : currentState[currentState.length - 1].id + 1;
+  }
+}
+export { addNewTask, handlTaskBehavior, fillTaskList };
