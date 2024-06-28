@@ -3,19 +3,21 @@ const myUL = document.getElementById('myUL');
 
 function addNewTasks() {
   const task = myInput.value.trim();
-
+  myInput.value = '';
   if (task === '') {
     alert('Please enter text');
     return;
   }
   createLi(task);
-    myInput.value = '';
  }
-
 function createLi(text) {
 const liEl = document.createElement('li');
   liEl.textContent = text;
   myUL.appendChild(liEl);
+  addCloseButton(liEl);
+}
+function handleTaskBehaviour() {
+  
 }
 
 function addCloseButton(target) {
@@ -27,4 +29,4 @@ function addCloseButton(target) {
 }
 
 
-export { addNewTasks };
+export { addNewTasks, handleTaskBehaviour };
