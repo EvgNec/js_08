@@ -1,3 +1,7 @@
+import { save, load } from './05-ls.js';
+const keyLS = "TODO";
+
+
 const myInput = document.getElementById('myInput');
 const myUL = document.getElementById('myUL');
 
@@ -9,7 +13,9 @@ function addNewTasks() {
     return;
   }
   createLi(task);
+  console.log(createTaskObj(task, true));
  }
+ 
 function createLi(text) {
 const liEl = document.createElement('li');
   liEl.textContent = text;
@@ -24,6 +30,14 @@ function handleTaskBehaviour({ target }) {
     
   }
 }
+
+function createTaskObj(text, isDone) {
+  return {
+    text,
+    isDone,
+    id:0
+}
+ }
 
 function addCloseButton(target) {
   const span = document.createElement('span');
