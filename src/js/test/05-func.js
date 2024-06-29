@@ -17,11 +17,10 @@ const liEl = document.createElement('li');
   addCloseButton(liEl);
 }
 function handleTaskBehaviour({ target }) {
-  console.log("target", target)
   if (target.nodeName === "LI") {
-    target.classList.togle("checked");
-  } else if (target.className === "close") {
-    console.log("target.className", target.className)
+    target.classList.toggle("checked");
+  } else if (target.classList.contains("close")) {
+    target.parentNode.remove();
     
   }
 }
