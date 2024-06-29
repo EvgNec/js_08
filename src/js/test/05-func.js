@@ -16,8 +16,14 @@ const liEl = document.createElement('li');
   myUL.appendChild(liEl);
   addCloseButton(liEl);
 }
-function handleTaskBehaviour() {
-  
+function handleTaskBehaviour({ target }) {
+  console.log("target", target)
+  if (target.nodeName === "LI") {
+    target.classList.togle("checked");
+  } else if (target.className === "close") {
+    console.log("target.className", target.className)
+    
+  }
 }
 
 function addCloseButton(target) {
