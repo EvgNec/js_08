@@ -1,2 +1,0 @@
-const e=document.getElementById("myInput"),t=document.getElementById("myUL");const n=document.getElementById("addBtn"),c=document.getElementById("myUL");n.addEventListener("click",(function(){const n=e.value.trim();e.value="",""!==n?function(e){const n=document.createElement("li");n.textContent=e,t.appendChild(n),function(e){const t=document.createElement("span"),n=document.createTextNode("×");t.className="close",t.appendChild(n),e.appendChild(t)}(n)}(n):alert("Please enter text")})),c.addEventListener("click",(function(){}));
-//# sourceMappingURL=05-test.6324b170.js.map
