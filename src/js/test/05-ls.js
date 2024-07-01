@@ -1,19 +1,18 @@
-const save = (key, value) => {
-  try {
-    const serializedState = JSON.stringify(value);
-    localStorage.setItem(key, serializedState);
-  } catch (error) {
-    console.error('Set state error: ', error.message);
-  }
-};
+export const save = (key, value) => {
+    try {
+        const data = JSON.stringify(value);
+        localStorage.setItem(key, data);
+    } catch (err) { 
+        console.error("Stringify error", err.message);
+    }
 
-const load = key => {
-  try {
-    const serializedState = localStorage.getItem(key);
-    return serializedState === null ? undefined : JSON.parse(serializedState);
-  } catch (error) {
-    console.error('Get state error: ', error.message);
-  }
-};
+ }
 
-export default { save, load };
+export const load = (key) => { 
+      try {
+    const data = localStorage.getItem(key);
+    return data === null ? undefined : JSON.parse(data);
+  } catch (error) {
+    console.error("Get state error: ", error.message);
+  }
+}
