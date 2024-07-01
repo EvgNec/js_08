@@ -13,7 +13,7 @@ function addNewTasks() {
     return;
   }
   createLi(task);
-  console.log(createTaskObj(task, true));
+  addTaskToLocalStorage(text);
  }
  
 function createLi(text) {
@@ -31,13 +31,23 @@ function handleTaskBehaviour({ target }) {
   }
 }
 
-function createTaskObj(text, isDone) {
+function createTaskObj(text, isDone=false) {
   return {
     text,
     isDone,
     id:0
 }
+}
+ 
+function addTaskToLocalStorage(text, isDone) {
+  const currentState = load(keyLS);
+
+
+  createTaskObj(task, true);
+  
+
  }
+
 
 function addCloseButton(target) {
   const span = document.createElement('span');
