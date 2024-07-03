@@ -15,9 +15,10 @@ function addNewTasks() {
   addTaskToLocalStorage(task, true);
 }
 
-function createLi(text) {
+function createLi(text, isDone = false, id = currentID) {
   const liEl = document.createElement('li');
   liEl.textContent = text;
+  liEl.dataset.id = id;
   myUL.appendChild(liEl);
   addCloseButton(liEl);
 }
