@@ -32,6 +32,9 @@ function handleTaskBehaviour({ target }) {
     currentState[taskIndex].isDone = !currentState[taskIndex].isDone;    
   } else if (target.classList.contains('close')) {
     target.parentNode.remove();
+     const taskIndex =
+      currentState.findIndex(task => Number(task.id) === Number(target.parentNode.dataset.id))
+    currentState.splice(taskIndex, 1);
   }
   save(keyLS, currentState);
 }
