@@ -1,6 +1,6 @@
 import { save, load } from './05-ls.js';
 const keyLS = 'TODO';
-    let currentID = 0;
+let currentID = 0;
 const myInput = document.getElementById('myInput');
 const myUL = document.getElementById('myUL');
 
@@ -12,22 +12,28 @@ function addNewTasks() {
     return;
   }
   createLi(task);
-  addTaskToLocalStorage(task, true);
+  addTaskToLocalStorage(task);
 }
 
 function createLi(text, isDone = false, id = currentID) {
   const liEl = document.createElement('li');
   liEl.textContent = text;
   liEl.dataset.id = id;
+  if (isDone) liEl.classList.add('checked');
   myUL.appendChild(liEl);
   addCloseButton(liEl);
 }
 function handleTaskBehaviour({ target }) {
+  const currentState = load(keyLS);
   if (target.nodeName === 'LI') {
     target.classList.toggle('checked');
+    const taskIndex =
+      currentState.findIndex(task => Number(task.id) === Number(target.dataset.id))
+    currentState[taskIndex].isDone = !currentState[taskIndex].isDone;    
   } else if (target.classList.contains('close')) {
     target.parentNode.remove();
   }
+  save(keyLS, currentState);
 }
 
 function createTaskObj(text, isDone = false) {
@@ -48,15 +54,10 @@ function addTaskToLocalStorage(text, isDone) {
     save(keyLS, arr);
   } else {
     //до існуючого додати новий обєект
-
-    currentState.forEach(el =>
-    {
-      el.id >= currentID ? currentID = el.id + 1 : currentID = currentID;
-    });
     currentState.push(createTaskObj(text, isDone));
     save(keyLS, currentState);
-
   }
+    currentID += 1;
 }
 
 function addCloseButton(target) {
