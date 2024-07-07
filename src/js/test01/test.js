@@ -1,4 +1,4 @@
-import { addNewTasks, handleTaskBehaviour, fillTaskList } from './05-func';
+import { addNewTasks, handleTaskBehaviour, fillTaskList } from './func';
 
 const addBtn = document.getElementById('addBtn');
 const myUL = document.getElementById('myUL');

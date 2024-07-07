@@ -1,4 +1,4 @@
-import { save, load } from './05-ls.js';
+import { save, load } from './ls.js';
 const keyLS = 'TODO';
 let currentID = 0;
 const myInput = document.getElementById('myInput');
