@@ -23,8 +23,13 @@ addCloseButton(liEl);
 
 
 function handleTaskBehaviour({ target }) {
-
+  console.log("target.nodeName", target.nodeName);
+  if (target.nodeName = 'LI') {
+    target.classList.toggle('checked');
+   }
 }
+
+
 
 function createTaskObj(text, isDone = false) {
   return {
