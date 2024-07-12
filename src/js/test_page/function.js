@@ -12,6 +12,7 @@ const task = myInput.value.trim();
   }
   createLi(task);
   myInput.value = '';
+  addTaskToLocalStorage(task);
 }
 
 function createLi(text, isDone = false, id = currentID) {
@@ -33,12 +34,23 @@ function handleTaskBehaviour({ target }) {
 
 function createTaskObj(text, isDone = false) {
   return {
-
+    text,
+    isDone,
+    id: currentID,
   };
 }
 
 function addTaskToLocalStorage(text, isDone) {
-
+  const curentState = load(keyLS);
+  if (curentState === undefined) {
+    save(keyLS, createTaskObj(text, isDone)); 
+  }
+  else {
+    console.log("curentState2", curentState);
+            console.log("curentState3", curentState.push(createTaskObj(text, isDone)))
+    save(keyLS, curentState.push(createTaskObj(text, isDone))); 
+  }
+ 
 }
 
 function addCloseButton(target) {
