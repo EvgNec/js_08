@@ -5,8 +5,8 @@ const myInput = document.getElementById('myInput');
 const myUL = document.getElementById('myUL');
 
 function addNewTasks() {
-const task = myInput.value.trim();
-  if (task === '') { 
+  const task = myInput.value.trim();
+  if (task === '') {
     alert('Please enter');
     return;
   }
@@ -18,19 +18,29 @@ const task = myInput.value.trim();
 function createLi(text, isDone = false, id = currentID) {
   const liEl = document.createElement('li');
   liEl.textContent = text;
+  liEl.dataset.id = id;
+  if (isDone) {
+    liEl.classList.add('checked');
+  }
   myUL.appendChild(liEl);
-addCloseButton(liEl);
+  addCloseButton(liEl);
 }
-
 
 function handleTaskBehaviour({ target }) {
-  console.log("target.nodeName", target.nodeName);
-  if (target.nodeName = 'LI') {
+  const currentState = load(keyLS);
+  if ((target.nodeName = 'LI')) {
     target.classList.toggle('checked');
-   }
+    const taskIndex = currentState.findIndex(
+      task => Number(task.id) === Number(target.dataset.id));
+    currentState[taskIndex].isDone = !currentState[taskIndex].isDone;
+  } else if (target.classList.contains('close')) {
+    target.parentNode.remove();
+     const taskIndex =
+      currentState.findIndex(task => Number(task.id) === Number(target.parentNode.dataset.id))
+    currentState.splice(taskIndex, 1);
+  }
+    save(keyLS, currentState);
 }
-
-
 
 function createTaskObj(text, isDone = false) {
   return {
@@ -41,16 +51,16 @@ function createTaskObj(text, isDone = false) {
 }
 
 function addTaskToLocalStorage(text, isDone) {
-  const curentState = load(keyLS);
-  if (curentState === undefined) {
-    save(keyLS, createTaskObj(text, isDone)); 
+  const currentState = load(keyLS);
+  if (currentState === undefined) {
+    const arr = [];
+    arr.push(createTaskObj(text, isDone));
+    save(keyLS, arr);
+  } else {
+    currentState.push(createTaskObj(text, isDone));
+    save(keyLS, currentState);
   }
-  else {
-    console.log("curentState2", curentState);
-            console.log("curentState3", curentState.push(createTaskObj(text, isDone)))
-    save(keyLS, curentState.push(createTaskObj(text, isDone))); 
-  }
- 
+  currentID += 1;
 }
 
 function addCloseButton(target) {
@@ -61,8 +71,6 @@ function addCloseButton(target) {
   target.appendChild(span);
 }
 
-function fillTaskList() {
-
-}
+function fillTaskList() {}
 
 export { addNewTasks, handleTaskBehaviour, fillTaskList };
