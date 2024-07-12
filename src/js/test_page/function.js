@@ -71,6 +71,15 @@ function addCloseButton(target) {
   target.appendChild(span);
 }
 
-function fillTaskList() {}
+function fillTaskList() {
+  const currentState = load(keyLS);
+  if (currentState !== undefined) {
+    currentState.forEach(({ text, isDone, id }) => {
+            createLi(text, isDone, id);
+      currentID = id+1;
+    });
+  }
+
+}
 
 export { addNewTasks, handleTaskBehaviour, fillTaskList };
