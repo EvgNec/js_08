@@ -10,7 +10,6 @@ const data = localStorage.getItem(keyLS);
 prevLS();
 
 function AddLS(e) {
-  const tar = e.target.value;
   const data = {
     Mail: elMail.value,
     Mes: elMes.value,
@@ -18,7 +17,7 @@ function AddLS(e) {
   localStorage.setItem(keyLS, JSON.stringify(data));
 }
 
-function prevLS() {
+function prevLS(e) {
   if (data) {
     const ls = JSON.parse(data);
     console.log('ls', ls);
@@ -29,4 +28,13 @@ function prevLS() {
 
 function saveToLS(e) {}
 
-function onSubmit(e) {}
+function onSubmit(e) {
+    e.preventDefault();
+  console.log("elMail.value", elMail.value);
+  console.log("elMes.value", elMes.value);
+  localStorage.removeItem(keyLS); 
+elMail.value = '';
+elMes.value = '';
+
+
+}
